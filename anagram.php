@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		}
 $time_end = microtime(true);
 $time = round($time_end - $time_start, 2);
-echo 'Kulutatud aeg : '.$time.' seconds';
+echo 'Time spent : '.$time.' seconds';
 
     } else {
         //No button clicked
