@@ -1,7 +1,7 @@
 <?php 
-//include 'lemmad.txt';
 $file_words = array();
 
+/******Custom Functions begin*******************************/
 function create_anagram_array() {
 	$file_lines = file('lemmad.txt');
 	foreach ($file_lines as $line) {
@@ -12,7 +12,6 @@ function create_anagram_array() {
 	return $result;
 }
 
-//var_dump(create_anagram_array());
 
 function find_anagram($word1, $word2) {
 	$count = 0;
@@ -20,9 +19,9 @@ function find_anagram($word1, $word2) {
 				if (count_chars(strtolower($word1), 1) == count_chars(strtolower($word2), 1)) {
 					echo $word2 . '<br />';	
 				}
-				
 			}
-}
+		}
+/******Custom Functions end*******************************/
 ?>
 
 <!DOCTYPE html>
@@ -40,42 +39,31 @@ function find_anagram($word1, $word2) {
 </body>
 </html>
 
-
-
 <?php
 
+/******Program śtarts*******************************/
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //something posted
+    //If something posted
 
     if (isset($_POST['submit'])) {
-        // btnsubmit
+        // Submit btn clicked
         $time_start = microtime(true);
         $word1 = $_POST['word'];
         $words_to_compare = create_anagram_array();
-//var_dump($words_to_compare);
-//$ee = json_encode($words_to_compare);
-//$new = str_replace( array("\r", "\r\n", "\n" ), '', $words_to_compare);
- //var_dump($new);
-foreach ($words_to_compare as $key => $val) {
-	$word2 =  $val;
-	find_anagram($word1, $word2);
-}
+		foreach ($words_to_compare as $key => $val) {
+			$word2 =  $val;
+			find_anagram($word1, $word2);
+		}
 $time_end = microtime(true);
-$time = $time_end - $time_start;
+$time = round($time_end - $time_start, 2);
 echo 'Kulutatud aeg : '.$time.' seconds';
 
     } else {
-        //nothing
+        //No button clicked
 
     }
 }
-
-
-//find_anagram($word1, $word2);
-
-//find_anagram($word1, implode(',', $file_words));
-
-//find_anagram($word1, $word2);
-
+/******Program end*******************************/
 
 ?>
